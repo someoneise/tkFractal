@@ -1,6 +1,7 @@
 import tkinter as tk
 import matplotlib
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import os
 
 matplotlib.use('TkAgg')
@@ -14,7 +15,11 @@ from subcode.data_process import generateDravesIFS
 folder_path = 'ifs_files'
 available_files = os.listdir(folder_path)
 available_fractals = [f[:-4] for f in available_files]
-colormaps = ['summer','Pastel1','Pastel2','flag','prism','tab10',]
+
+dcolors = ["red", "white", "blue"]
+drapeau = LinearSegmentedColormap.from_list("drapeau", dcolors)
+
+colormaps = ['summer','autumn','winter','hsv','Set1','nipy_spectral','drapeau','prism','tab10',]
 
 class Fenetre(tk.Tk):
     def __init__(self):
@@ -33,7 +38,7 @@ class Fenetre(tk.Tk):
 
 
     def draw_scatter_top(self, x_points:list, y_points:list, col:str='white'):
-        figure = plt.Figure(figsize=(6, 4), dpi=100)
+        figure = plt.Figure(figsize=(8, 6), dpi=100)
         
         # create FigureCanvasTkAgg object
         figure_canvas = FigureCanvasTkAgg(figure, self)
@@ -50,7 +55,7 @@ class Fenetre(tk.Tk):
 
         ax.set_axis_off() # to remove the axis ticks
 
-        figure_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1) # make it into tkinter
+        figure_canvas.get_tk_widget().grid(column=0,row=0,columnspan=7, sticky='nesw') # make it into tkinter
 
         return figure, ax # ,scatter
     
@@ -58,32 +63,59 @@ class Fenetre(tk.Tk):
         self.ax.clear() # Clear the figure
 
         file_path = os.path.join(folder_path, available_files[self.frac_entry.curselection()[0]])# Select the file
-        if not os.path.isfile(file_path):
+        if not os.path.isfile(file_path): # Check if file_path is a file
             raise FileNotFoundError
         
-        x, y, c = generateDravesIFS(file_path,10000) # Generate the points 
+        colmap = colormaps[self.colormap_entry.curselection()[0]] #Choosing colormap
 
-        self.cmap = matplotlib.colormaps[colormaps[self.colormap_entry.curselection()[0]]] # Choose the colormap
-        self.ax.scatter(x, y, c=c, s=0.5, linewidths=0, cmap=self.cmap) # Plot the points
+        if colmap == 'drapeau': # Exception
+            self.cmap = drapeau
+        else:
+            self.cmap = matplotlib.colormaps[colmap]
+        
+        x, y, c = generateDravesIFS(file_path,40000) # Generate the points 
+
+        self.ax.scatter(x, y, c=c, s=0.3, linewidths=0, cmap=self.cmap) # Plot the points
         self.figure.canvas.draw() # Update the figure (v too)
         self.figure.canvas.flush_events()
 
     def draw_widgets(self):
+        """
+        |       plt       | :plot
+        -------------------
+        |lbl|  |lbl|  |   | :Label
+        -------------------
+        |ent|SB|ent|SB|btn| :Entry,ScrollBar and Button
+        -------------------
+        """
         self.params = tk.Variable(value=available_fractals) # List of available fractals
         self.cmaps = tk.Variable(value=colormaps) # List of available fractals
-        
-        self.frac_entry = tk.Listbox(self, listvariable=self.params,height=6,selectmode=tk.SINGLE,exportselection=0)
-        self.frac_entry.pack(side=tk.LEFT)
 
+        self.lbl_cmaps = tk.Label(text='Colormaps:') # Colormap label
+        self.lbl_cmaps.grid(column=2,row=1,sticky='w')
+
+        self.lbl_fractals = tk.Label(text='Fractals:') # Fractal label
+        self.lbl_fractals.grid(column=0,row=1,sticky='w')
+
+        # Fractal selection widget
+        self.frac_entry = tk.Listbox(self, listvariable=self.params,height=6,selectmode=tk.SINGLE,exportselection=0) 
+        self.frac_entry.grid(column=0,row=2,rowspan=4,columnspan=2,sticky='nsew')
+        
+        #Fractal scrollbar
+        self.scroll1 = tk.Scrollbar(self.frac_entry,orient='vertical',command=self.frac_entry.yview)
+        self.frac_entry.configure(yscrollcommand=self.scroll1.set)
+        self.scroll1.pack(side=tk.RIGHT,fill='y') #grid(column=1,row=2,sticky='ns')
+
+        # Colormap selection widget
         self.colormap_entry = tk.Listbox(self, listvariable=self.cmaps,height=6,selectmode=tk.SINGLE,exportselection=0)
-        self.colormap_entry.pack(side=tk.LEFT)
+        self.colormap_entry.grid(column=2,row=2,rowspan=4,sticky='nsew')
 
-        self.btn_replot = tk.Button(self,text="Generate") # generate button
+        self.btn_replot = tk.Button(self,text="(re)Generate") # generate button
         self.btn_replot.bind("<Button-1>",func=self.replot) 
-        self.btn_replot.pack(side=tk.RIGHT)
+        self.btn_replot.grid(column=6,row=5)
         
-        self.scale = tk.Scale(orient='horizontal') # Non-functional, just a placeholder
-        self.scale.pack()
+        self.scale = tk.Scale(orient='vertical') # Non-functional, just a placeholder
+        self.scale.grid(column=4,row=2)
 
 
 if __name__ == '__main__':
