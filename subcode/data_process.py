@@ -4,7 +4,7 @@ import itertools
 from numpy import ndarray as NDarray
 import scipy
 from numba import jit
-from multiprocessing import Pool
+# from multiprocessing import Pool
 
 def read_data(param_file:str):
     """
