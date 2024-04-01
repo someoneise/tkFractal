@@ -4,6 +4,7 @@ from matplotlib.axes import Axes
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import os
+import numpy as np
 
 matplotlib.use('TkAgg')
 
@@ -35,9 +36,18 @@ class Fenetre(tk.Tk):
         # create a figure
         self.figure, self.ax = self.draw_scatter_top([0], [0])
 
+        self.compile_generator()
+
         #create tk widgets
         self.draw_widgets()
 
+    def compile_generator(self):
+        '''
+        Compiles the generator function for the first time'''
+        coeffs_sample = np.random.rand(10, 2, 2)
+        sums_sample = np.random.rand(10, 2)
+        probabilities_sample = np.random.rand(10)
+        generateDravesIFS(coeffs_sample, sums_sample, probabilities_sample, 0)
 
     def draw_scatter_top(self, x_points:list, y_points:list, col:str='white'):
         figure = Figure(figsize=(8, 6), dpi=100)
@@ -76,10 +86,11 @@ class Fenetre(tk.Tk):
             self.cmap = matplotlib.colormaps[colmap]
         
         coeffs,sums,probs = read_data(file_path) # Read the data from the file
+        
 
-        x, y, c = generateDravesIFS(coeffs,sums,probs,100000) # Generate the points 
+        x, y, c = generateDravesIFS(coeffs,sums,probs,200000) # Generate the points 
 
-        self.ax.scatter(x, y, c=c, s=0.3, linewidths=0, cmap=self.cmap) # Plot the points
+        self.ax.scatter(x, y, c=c, s=0.1, linewidths=0, cmap=self.cmap) # Plot the points
         self.figure.canvas.draw() # Update the figure (v too)
         self.figure.canvas.flush_events()
 

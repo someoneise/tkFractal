@@ -4,6 +4,7 @@ import itertools
 from numpy import ndarray as NDarray
 import scipy
 from numba import jit
+from multiprocessing import Pool
 
 def read_data(param_file:str):
     """
@@ -61,8 +62,6 @@ def generateDravesIFS(coeffs:NDarray,sums:NDarray,probabilities:NDarray,iteratio
     y_points = np.zeros(iterations)
     c_points = np.zeros(iterations)
 
-    # function_choices = len(coeffs)
-
     # Perform the iterations (heavy part of the code)
     for i in range(iterations):
         
@@ -77,3 +76,21 @@ def generateDravesIFS(coeffs:NDarray,sums:NDarray,probabilities:NDarray,iteratio
         c_points[i] = float(c)
 
     return x_points,y_points,c_points
+
+
+'''
+tried to parallelize the function but it is not working as expected :(
+
+def parallel_generateDravesIFS(coeffs:NDarray, sums:NDarray, probabilities:NDarray, iterations:int=50000, num_processes:int=4) -> tuple:
+    # Create a multiprocessing Pool
+    with Pool(num_processes) as pool:
+        # Run generateDravesIFS in parallel and collect the results
+        results = pool.starmap(generateDravesIFS, [(coeffs, sums, probabilities, iterations) for _ in range(num_processes)])
+
+    # Concatenate the results
+    x_points_all = np.concatenate([result[0] for result in results])
+    y_points_all = np.concatenate([result[1] for result in results])
+    c_points_all = np.concatenate([result[2] for result in results])
+
+    return x_points_all, y_points_all, c_points_all
+    '''
