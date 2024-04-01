@@ -1,5 +1,6 @@
 import tkinter as tk
 import matplotlib
+from matplotlib.axes import Axes
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import os
@@ -10,7 +11,8 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     #NavigationToolbar2Tk
 )
-from subcode.data_process import generateDravesIFS
+from subcode.data_process import generateDravesIFS, read_data
+from matplotlib.figure import Figure
 
 folder_path = 'ifs_files'
 available_files = os.listdir(folder_path)
@@ -31,26 +33,26 @@ class Fenetre(tk.Tk):
         # x, y = generateDravesIFS(file_path,50000)
 
         # create a figure
-        self.figure, self.ax = self.draw_scatter_top(0, 0)
+        self.figure, self.ax = self.draw_scatter_top([0], [0])
 
         #create tk widgets
         self.draw_widgets()
 
 
     def draw_scatter_top(self, x_points:list, y_points:list, col:str='white'):
-        figure = plt.Figure(figsize=(8, 6), dpi=100)
-        
+        figure = Figure(figsize=(8, 6), dpi=100)
+                
         # create FigureCanvasTkAgg object
         figure_canvas = FigureCanvasTkAgg(figure, self)
 
-        ax = plt.Axes(figure,[0., 0., 1., 1.]) # Set the border size to 0
+        ax = Axes(figure,(0., 0., 1., 1.)) # Set the border size to 0
         ax.set_facecolor('black') # Black graph
         ax.autoscale() # Make the ax scale adjust itself
 
         figure.set_facecolor("black") # All black (can be changed to custom color later)
 
         figure.add_axes(ax)
-        
+
         scatter = ax.scatter(x_points,y_points) # may be removed later
 
         ax.set_axis_off() # to remove the axis ticks
@@ -73,7 +75,9 @@ class Fenetre(tk.Tk):
         else:
             self.cmap = matplotlib.colormaps[colmap]
         
-        x, y, c = generateDravesIFS(file_path,40000) # Generate the points 
+        coeffs,sums,probs = read_data(file_path) # Read the data from the file
+
+        x, y, c = generateDravesIFS(coeffs,sums,probs,100000) # Generate the points 
 
         self.ax.scatter(x, y, c=c, s=0.3, linewidths=0, cmap=self.cmap) # Plot the points
         self.figure.canvas.draw() # Update the figure (v too)
@@ -85,7 +89,7 @@ class Fenetre(tk.Tk):
         -------------------
         |lbl|  |lbl|  |   | :Label
         -------------------
-        |ent|SB|ent|SB|btn| :Entry,ScrollBar and Button
+        |ent|SB|ent|SB|btn| :Entry, ScrollBar and Button
         -------------------
         """
         self.params = tk.Variable(value=available_fractals) # List of available fractals
