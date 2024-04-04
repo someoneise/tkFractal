@@ -1,3 +1,4 @@
+# un puto estuvo aqui
 import tkinter as tk
 import matplotlib
 from matplotlib.axes import Axes
