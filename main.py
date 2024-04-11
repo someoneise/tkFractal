@@ -5,24 +5,22 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import os
 import numpy as np
+from subcode.data_process import generateDravesIFS, read_data
+from controler import controleur
+from matplotlib.figure import Figure
 
 matplotlib.use('TkAgg')
+
 
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     #NavigationToolbar2Tk
 )
-from subcode.data_process import generateDravesIFS, read_data
-from matplotlib.figure import Figure
-
-folder_path = 'ifs_files'
-available_files = os.listdir(folder_path)
-available_fractals = [f[:-4] for f in available_files]
-
+colormaps = ['summer','autumn','winter','hsv','Set1','nipy_spectral','drapeau','prism','tab10',]
 dcolors = ["red", "white", "blue"]
 drapeau = LinearSegmentedColormap.from_list("drapeau", dcolors)
 
-colormaps = ['summer','autumn','winter','hsv','Set1','nipy_spectral','drapeau','prism','tab10',]
+
 
 class Fenetre(tk.Tk):
     """
@@ -42,6 +40,7 @@ class Fenetre(tk.Tk):
         """
         super().__init__()
 
+        self.controleur=controleur()  ##lance le controleur
         self.title('Fractal Designer')
 
         # example data
@@ -50,20 +49,10 @@ class Fenetre(tk.Tk):
         # create a figure
         self.figure, self.ax = self.draw_scatter_top([0], [0])
 
-        self.compile_generator() # Compile the generator function before the main loop
-
         #create tk widgets
         self.draw_widgets()
+        
 
-    def compile_generator(self):
-        '''
-        Compiles the generator function for the first time,
-        to avoid the delay when the button is first pressed
-        '''
-        coeffs_sample = np.random.rand(10, 2, 2)
-        sums_sample = np.random.rand(10, 2)
-        probabilities_sample = np.random.rand(10)
-        generateDravesIFS(coeffs_sample, sums_sample, probabilities_sample, 0)
 
     def draw_scatter_top(self, x_points:list, y_points:list, col:str='white'):
         """
@@ -78,7 +67,7 @@ class Fenetre(tk.Tk):
         - figure (Figure): The matplotlib figure object.
         - ax (Axes): The matplotlib axes object.
         """
-        figure = Figure(figsize=(8, 6), dpi=100)
+        figure = Figure(figsize=(6, 4), dpi=100)
                 
         # create FigureCanvasTkAgg object
         figure_canvas = FigureCanvasTkAgg(figure, self)
@@ -108,9 +97,8 @@ class Fenetre(tk.Tk):
         """
         self.ax.clear() # Clear the figure
 
-        file_path = os.path.join(folder_path, available_files[self.frac_entry.curselection()[0]])# Select the file
-        if not os.path.isfile(file_path): # Check if file_path is a file
-            raise FileNotFoundError
+        file_path=self.controleur.path(self.frac_entry.curselection()[0]) # Select the file
+
         
         colmap = colormaps[self.colormap_entry.curselection()[0]] #Choosing colormap
 
@@ -130,8 +118,10 @@ class Fenetre(tk.Tk):
     def draw_widgets(self):
         """
         Draws the widgets on the window.
+    
         """
-        self.params = tk.Variable(value=available_fractals) # List of available fractals
+
+        self.params = tk.Variable(value=self.controleur.fractal_possible()) # List of available fractals
         self.cmaps = tk.Variable(value=colormaps) # List of available fractals
 
         self.lbl_cmaps = tk.Label(text='Colormaps:') # Colormap label
