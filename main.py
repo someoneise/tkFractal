@@ -7,6 +7,8 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.colors import Colormap
 import os
 import numpy as np
+#hello
+
 matplotlib.use('TkAgg')
 
 from matplotlib.backends.backend_tkagg import (
@@ -128,6 +130,11 @@ class Fenetre(tk.Tk):
         self.figure.canvas.draw() # Update the figure 
         self.figure.canvas.flush_events()
 
+    def savefigure(self, event): 
+        self.figure.savefig("images/"+ available_fractals[self.frac_entry.curselection()[0]]+".png")
+
+
+
     def draw_widgets(self):
         """
         Draws the widgets on the window.
@@ -160,6 +167,26 @@ class Fenetre(tk.Tk):
         
         self.scale = tk.Scale(orient='vertical') # Non-functional, just a placeholder
         self.scale.grid(column=4,row=2)
+
+        #Bouton qui enregistre les fractals en tant qu'image 
+        self.btn_3 = tk.Button(self, text = "Enregistrement en tant qu'image")
+        self.btn_3.grid(column = 6, row = 1,sticky='wns')
+        self.btn_3.bind("<Button-1>",self.savefigure)
+
+        #Bouton qui permet de charger des fractals pour pouvoir les modifier 
+        self.btn_4 = tk.Button(self, text = "Importer fractal")
+        self.btn_4.grid(column = 6, row = 2,sticky='wn')
+        #self.btn_4.bind("<Button-1>",self.modif)
+
+        #Bouton qui permet de charger des fractals pour pouvoir les modifier 
+        self.btn_4 = tk.Button(self, text = "Navigation")
+        self.btn_4.grid(column = 6, row = 3,sticky='wns')
+        #self.btn_4.bind("<Button-1>",self.modif)
+
+        #Bouton qui permet de chrager les fractals 
+        self.btn_5 = tk.Button(self, text = "Enregistrer le nouveau fractal")
+        self.btn_5.grid(column = 6, row = 4,sticky='wns')
+        #self.btn_5.bind("<Button-1>",self.save)
 
 
 if __name__ == '__main__':

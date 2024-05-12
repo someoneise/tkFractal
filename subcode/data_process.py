@@ -25,7 +25,7 @@ def read_data(param_file:str):
         matrixreader = csv.reader(csvfile, delimiter=' ')
         for row in matrixreader:
             rawcoeffs = [float(i) for i in row[:4]]
-            coeffs = itertools.batched(rawcoeffs,2)
+            coeffs = batched(rawcoeffs,2)
             tcoeffs.append(list(coeffs))
             sums.append([float(i) for i in row[4:6]])
             probabilites.append(float(row[6]))
