@@ -1,6 +1,6 @@
 import csv
 import numpy as np
-import itertools
+from itertools import batched
 from numpy import ndarray as NDarray
 import scipy
 from numba import jit
@@ -77,6 +77,8 @@ def generateDravesIFS(coeffs:NDarray,sums:NDarray,probabilities:NDarray,iteratio
 
     return x_points,y_points,c_points
 
+def generateAttractor():
+    pass
 
 '''
 tried to parallelize the function but it is not working as expected :(

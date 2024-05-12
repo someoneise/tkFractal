@@ -2,10 +2,11 @@ import tkinter as tk
 import matplotlib
 from matplotlib.axes import Axes
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.colors import Colormap
 import os
 import numpy as np
-
 matplotlib.use('TkAgg')
 
 from matplotlib.backends.backend_tkagg import (
@@ -13,7 +14,7 @@ from matplotlib.backends.backend_tkagg import (
     #NavigationToolbar2Tk
 )
 from subcode.data_process import generateDravesIFS, read_data
-from matplotlib.figure import Figure
+
 
 folder_path = 'ifs_files'
 available_files = os.listdir(folder_path)
@@ -78,7 +79,7 @@ class Fenetre(tk.Tk):
         - figure (Figure): The matplotlib figure object.
         - ax (Axes): The matplotlib axes object.
         """
-        figure = Figure(figsize=(8, 6), dpi=100)
+        figure = Figure(figsize=(10, 7), dpi=100)
                 
         # create FigureCanvasTkAgg object
         figure_canvas = FigureCanvasTkAgg(figure, self)
@@ -121,10 +122,10 @@ class Fenetre(tk.Tk):
         
         coeffs,sums,probs = read_data(file_path) # Read the data from the file
         
-        x, y, c = generateDravesIFS(coeffs,sums,probs,200000) # Generate the points 
+        x, y, c = generateDravesIFS(coeffs,sums,probs,250000) # Generate the points 
 
-        self.ax.scatter(x, y, c=c, s=0.1, linewidths=0, cmap=self.cmap) # Plot the points
-        self.figure.canvas.draw() # Update the figure (v too)
+        self.ax.scatter(x, y, c=c, s=0.1, linewidths=0, cmap=self.cmap,alpha=1) # Plot the points
+        self.figure.canvas.draw() # Update the figure 
         self.figure.canvas.flush_events()
 
     def draw_widgets(self):
