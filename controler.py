@@ -1,13 +1,7 @@
-import matplotlib
-from matplotlib.axes import Axes
-import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap
+
 import os
 import numpy as np
 from subcode.data_process import generateDravesIFS, read_data
-from matplotlib.figure import Figure
-
-
 class controleur: 
 
     def __init__(self):

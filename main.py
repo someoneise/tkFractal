@@ -7,7 +7,7 @@ from matplotlib.colors import LinearSegmentedColormap
 # from matplotlib.colors import Colormap
 import os
 import numpy as np
-from controler import controleur 
+from controler import controleur
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     # NavigationToolbar2Tk,
@@ -52,7 +52,7 @@ class Fenetre(tk.Tk):
         """
         super().__init__()
 
-        self.controleur=controleur()  ##lance le controleur
+        self.controleur = controleur()  # lance le controleur
         self.title('Fractal Designer')
 
         # example data
@@ -167,7 +167,7 @@ class Fenetre(tk.Tk):
     def draw_widgets(self):
         """
         Draws the widgets on the window.
-    
+
         """
         # List of available fractals
         self.params = tk.Variable(value=available_fractals)
@@ -236,8 +236,8 @@ class Fenetre(tk.Tk):
         self.btn_4.grid(column=6, row=3, sticky='wns')
         # self.btn_4.bind("<Button-1>",self.modif)
         #Bouton qui permet d'ouvrir le navigateur 
-        self.btn_4 = tk.Button(self, text = "Navigation")
-        self.btn_4.grid(column = 6, row = 3,sticky='wns')
+        self.btn_4 = tk.Button(self, text="Navigation")
+        self.btn_4.grid(column=6, row=3,sticky='wns')
         #self.btn_4.bind("<Button-1>",self.modif)
 
         # Bouton qui permet de chrager les fractals
@@ -247,23 +247,21 @@ class Fenetre(tk.Tk):
 
         #Bouton qui permet d'enregistrer les fractals 
         self.btn_5 = tk.Button(self, text = "Enregistrer le nouveau fractal")
-        self.btn_5.grid(column = 6, row = 4,sticky='wns')
+        self.btn_5.grid(column =6, row =4,sticky='wns')
         #self.btn_5.bind("<Button-1>",self.upload)
 
          #Bouton qui permet d'enregistrer les fractal en tant que json pour pouvoir les modifier 
-        self.btn_6 = tk.Button(self, text = "Enregistrer le nouveau fractal")
-        self.btn_6.grid(column = 6, row = 4,sticky='wns')
+        self.btn_6 = tk.Button(self, text ="Enregistrer le nouveau fractal")
+        self.btn_6.grid(column =6, row =4,sticky='wns')
         #self.btn_5.bind("<Button-1>",self.upload)
 
         #Scale 1 
         self.s1 = tk.Scale(orient='vertical') 
-        self.s1.grid(column=3,row=2)
+        self.s1.grid(column=3, row=2)
         
         #Scale 2 
         self.s2 = tk.Scale(orient='vertical')
-        self.s2.grid(column=3,row=2)
-
-        
+        self.s2.grid(column=3, row=2)
 
 if __name__ == '__main__':
     app = Fenetre()
