@@ -130,6 +130,8 @@ class Fenetre(tk.Tk):
 
     def savefigure(self, event): 
         self.figure.savefig("images/"+ available_fractals[self.frac_entry.curselection()[0]]+".png")
+    #def upload(self,event) : 
+        
 
 
 
@@ -176,16 +178,30 @@ class Fenetre(tk.Tk):
         self.btn_4.grid(column = 6, row = 2,sticky='wn')
         #self.btn_4.bind("<Button-1>",self.modif)
 
-        #Bouton qui permet de charger des fractals pour pouvoir les modifier 
+        #Bouton qui permet d'ouvrir le navigateur 
         self.btn_4 = tk.Button(self, text = "Navigation")
         self.btn_4.grid(column = 6, row = 3,sticky='wns')
         #self.btn_4.bind("<Button-1>",self.modif)
 
-        #Bouton qui permet de chrager les fractals 
+        #Bouton qui permet d'enregistrer les fractals 
         self.btn_5 = tk.Button(self, text = "Enregistrer le nouveau fractal")
         self.btn_5.grid(column = 6, row = 4,sticky='wns')
-        #self.btn_5.bind("<Button-1>",self.save)
+        #self.btn_5.bind("<Button-1>",self.upload)
 
+         #Bouton qui permet d'enregistrer les fractal en tant que json pour pouvoir les modifier 
+        self.btn_6 = tk.Button(self, text = "Enregistrer le nouveau fractal")
+        self.btn_6.grid(column = 6, row = 4,sticky='wns')
+        #self.btn_5.bind("<Button-1>",self.upload)
+
+        #Scale 1 
+        self.s1 = tk.Scale(orient='vertical') 
+        self.s1.grid(column=3,row=2)
+        
+        #Scale 2 
+        self.s2 = tk.Scale(orient='vertical')
+        self.s2.grid(column=3,row=2)
+
+        
 
 if __name__ == '__main__':
     app = Fenetre()
