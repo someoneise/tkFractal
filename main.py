@@ -153,6 +153,7 @@ class Fenetre(tk.Tk):
     def savefigure(self, event):
         selection = self.frac_entry.curselection()[0]
         self.figure.savefig("images/" + available_fractals[selection]+".png")
+        
 
     def draw_widgets(self):
         """
@@ -214,6 +215,7 @@ class Fenetre(tk.Tk):
 
         # Bouton qui enregistre les fractals en tant qu'image
         self.btn_3 = tk.Button(self, text="Enregistrement en tant qu'image")
+        self.btn_3.grid(column=6, row=1, sticky='wn')
         self.btn_3.bind("<Button-1>", self.savefigure)
 
         # Bouton qui permet de charger des fractals pour pouvoir les modifier
