@@ -1,0 +1,48 @@
+from tkinter import *
+from tkinter.ttk import *
+from tkinter.filedialog import askopenfile 
+import time
+
+ws = Tk()
+def open_file():
+    file_path = askopenfile(mode='r', filetypes=[('Json Files', '*json')])
+    if file_path is not None:
+        pass
+
+
+def uploadFiles():
+    pb1 = Progressbar(
+        ws, 
+        orient=HORIZONTAL, 
+        length=300, 
+        mode='determinate'
+        )
+    pb1.grid(row=4, columnspan=3, pady=20)
+    for i in range(5):
+        ws.update_idletasks()
+        pb1['value'] += 20
+        time.sleep(1)
+    pb1.destroy()
+    Label(ws, text='File Uploaded Successfully!', foreground='green').grid(row=4, columnspan=3, pady=10)
+        
+
+choose = Button(
+    ws, 
+    text ='Choose File', 
+    command = lambda:open_file()
+    ) 
+choose.grid(row=0, column=1)
+
+
+upld = Button(
+    ws, 
+    text='Upload Files', 
+    command=uploadFiles
+    )
+upld.grid(row=3, columnspan=3, pady=10)
+
+    
+
+
+
+ws.mainloop()
