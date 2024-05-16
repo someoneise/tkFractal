@@ -7,6 +7,7 @@ from matplotlib.colors import LinearSegmentedColormap
 # from matplotlib.colors import Colormap
 import os
 import numpy as np
+from controler import controleur 
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     # NavigationToolbar2Tk,
@@ -91,7 +92,7 @@ class Fenetre(tk.Tk):
         - figure (Figure): The matplotlib figure object.
         - ax (Axes): The matplotlib axes object.
         """
-        figure = Figure(figsize=(10, 7), dpi=80)
+        figure = Figure(figsize=(10, 7), dpi=60)
 
         # create FigureCanvasTkAgg object
         figure_canvas = FigureCanvasTkAgg(figure, self)
