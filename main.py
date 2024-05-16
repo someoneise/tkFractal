@@ -131,8 +131,6 @@ class Fenetre(tk.Tk):
     def savefigure(self, event): 
         self.figure.savefig("images/"+ available_fractals[self.frac_entry.curselection()[0]]+".png")
 
-
-
     def draw_widgets(self):
         """
         Draws the widgets on the window.
