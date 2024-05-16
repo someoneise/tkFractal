@@ -61,20 +61,10 @@ class Fenetre(tk.Tk):
         # create a figure
         self.figure, self.ax = self.draw_scatter_top([0], [0])
 
-        self.compile_generator()  # Compile the gen. func before the main loop
-
         # create tk widgets
         self.draw_widgets()
 
-    def compile_generator(self):
-        '''
-        Compiles the generator function for the first time,
-        to avoid the delay when the button is first pressed
-        '''
-        coeffs_sample = np.random.rand(10, 2, 2)
-        sums_sample = np.random.rand(10, 2)
-        probabilities_sample = np.random.rand(10)
-        generateDravesIFS(coeffs_sample, sums_sample, probabilities_sample, 0)
+
 
     def draw_scatter_top(self,
                          x_points: list,
@@ -146,7 +136,7 @@ class Fenetre(tk.Tk):
         coeffs, sums, probs = read_data(file_path)
 
         # Generate the points
-        x, y, c = generateDravesIFS(coeffs, sums, probs, 250000)
+        x, y, c = self.controleur.genereatepoints(coeffs, sums, probs)
 
         # Plot the points
         self.ax.scatter(x, y,

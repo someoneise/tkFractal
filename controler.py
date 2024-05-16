@@ -9,7 +9,7 @@ class controleur:
         self.available_files = os.listdir(self.folder_path)
         self.compile_generator() # Compile the generator function before the main loop
 
-    def compile_generator(self):
+    def compile_generator(self):  # Compile the gen. func before the main loop
         '''
         Compiles the generator function for the first time,
         to avoid the delay when the button is first pressed
@@ -30,4 +30,4 @@ class controleur:
         return [f[:-4] for f in self.available_files]
     
     def genereatepoints(self,coeffs,sums,probs):
-        return(generateDravesIFS(coeffs,sums,probs,200000)) #generate points
+        return(generateDravesIFS(coeffs,sums,probs,250000)) #generate points
