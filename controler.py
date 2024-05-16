@@ -34,3 +34,6 @@ class controleur:
     
     def fractal_possible (self):
         return [f[:-4] for f in self.available_files]
+    
+    def genereatepoints(self,coeffs,sums,probs):
+        return(generateDravesIFS(coeffs,sums,probs,200000)) #generate points

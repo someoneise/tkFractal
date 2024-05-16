@@ -109,7 +109,7 @@ class Fenetre(tk.Tk):
         
         coeffs,sums,probs = read_data(file_path) # Read the data from the file
         
-        x, y, c = generateDravesIFS(coeffs,sums,probs,200000) # Generate the points 
+        x, y, c = self.controleur.genereatepoints(coeffs,sums,probs)
 
         self.ax.scatter(x, y, c=c, s=0.1, linewidths=0, cmap=self.cmap) # Plot the points
         self.figure.canvas.draw() # Update the figure (v too)
