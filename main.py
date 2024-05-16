@@ -90,7 +90,7 @@ class Fenetre(tk.Tk):
         - figure (Figure): The matplotlib figure object.
         - ax (Axes): The matplotlib axes object.
         """
-        figure = Figure(figsize=(10, 7), dpi=100)
+        figure = Figure(figsize=(10, 7), dpi=80)
 
         # create FigureCanvasTkAgg object
         figure_canvas = FigureCanvasTkAgg(figure, self)
