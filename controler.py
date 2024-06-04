@@ -2,12 +2,12 @@
 import os
 import numpy as np
 from subcode.data_process import generateDravesIFS, read_data
-class controleur: 
+class controleur:
 
     def __init__(self):
         self.folder_path = 'ifs_files'
         self.available_files = os.listdir(self.folder_path)
-        self.compile_generator() # Compile the generator function before the main loop
+        self.compile_generator()  # Compile the generator function before the main loop
 
     def compile_generator(self):  # Compile the gen. func before the main loop
         '''
@@ -19,15 +19,14 @@ class controleur:
         probabilities_sample = np.random.rand(10)
         generateDravesIFS(coeffs_sample, sums_sample, probabilities_sample, 0)
 
-            
-    def  path(self,frac_entry):    
-        filePath = os.path.join(self.folder_path, self.available_files[frac_entry])# Select the file
-        if not os.path.isfile(filePath): # Check if file_path is a file
+    def path(self,frac_entry):
+        filePath = os.path.join(self.folder_path, self.available_files[frac_entry])  # Select the file
+        if not os.path.isfile(filePath):  # Check if file_path is a file
             raise FileNotFoundError
         return filePath
-    
+
     def fractal_possible (self):
         return [f[:-4] for f in self.available_files]
-    
+
     def genereatepoints(self,coeffs,sums,probs):
-        return(generateDravesIFS(coeffs,sums,probs,250000)) #generate points
+        return(generateDravesIFS(coeffs,sums,probs,250000))  # generate points
