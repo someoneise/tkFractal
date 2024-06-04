@@ -4,26 +4,19 @@ import json
 with open('fiche.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
-# Fonction pour transformer le JSON en texte
-def json_to_text(data, indent=0):
-    text = ""
-    indent_space = "  " * indent
-    if isinstance(data, dict):
-        for key, value in data.items():
-            text += f"{indent_space}{key}: "
-            if isinstance(value, (dict, list)):
-                text += "\n" + json_to_text(value, indent + 1)
-            else:
-                text += f"{value}\n"
-    elif isinstance(data, list):
-        for item in data:
-            text += json_to_text(item, indent + 1)
-    else:
-        text += f"{data}\n"
-    return text
+# Assumons que le JSON contient une liste d'objets
+if isinstance(data, dict):  # Si le JSON n'est pas une liste, on le met dans une liste
+    data = [data]
+
+# Transformer les données en texte avec chaque information sur une ligne distincte
+def json_to_text(data):
+    texts = []
+    for item in data:
+        if 'x' in item and 'y' in item and 'couleur' in item:
+            text = f"x: {item['x']}\ny: {item['y']}\ncouleur: {item['couleur']}\n"
+            texts.append(text)
+    return "\n".join(texts)
 
 # Convertir les données JSON en texte
 text_output = json_to_text(data)
 
-# Afficher le texte
-print(text_output)
