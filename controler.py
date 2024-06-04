@@ -19,6 +19,9 @@ class controleur:
         probabilities_sample = np.random.rand(10)
         generateDravesIFS(coeffs_sample, sums_sample, probabilities_sample, 0)
 
+    def lecture_data(self,file):
+        return read_data(file)
+
     def path(self,frac_entry):
         filePath = os.path.join(self.folder_path, self.available_files[frac_entry])  # Select the file
         if not os.path.isfile(filePath):  # Check if file_path is a file

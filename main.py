@@ -12,7 +12,7 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg,
     # NavigationToolbar2Tk,
 )
-from subcode.data_process import generateDravesIFS, read_data
+
 
 matplotlib.use('TkAgg')
 
@@ -133,8 +133,7 @@ class Fenetre(tk.Tk):
             self.cmap = matplotlib.colormaps[colmap]
 
         # Read the data from the file
-        coeffs, sums, probs = read_data(file_path)
-
+        coeffs, sums, probs=self.controleur.lecture_data(file_path)
         # Generate the points
         x, y, c = self.controleur.genereatepoints(coeffs, sums, probs)
 
