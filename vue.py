@@ -169,7 +169,7 @@ class Fenetre(tk.Tk):
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         self.ax.set_xlim([xlim[0],xlim[1]])
-        self.ax.set_ylim([ylim[0]+ylim[0]*0.4,ylim[1]+ylim[0]*0.4])
+        self.ax.set_ylim([ylim[0]-ylim[0]*0.4,ylim[1]-ylim[0]*0.4])
         self.figure.canvas.draw()
 
 
@@ -177,20 +177,20 @@ class Fenetre(tk.Tk):
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         self.ax.set_xlim([xlim[0],xlim[1]])
-        self.ax.set_ylim([ylim[0]-ylim[0]*0.4,ylim[1]-ylim[0]*0.4])
+        self.ax.set_ylim([ylim[0]+ylim[0]*0.4,ylim[1]+ylim[0]*0.4])
         self.figure.canvas.draw()
 
     def move_left(self):
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
-        self.ax.set_xlim([xlim[0]-xlim[0]*0.2,xlim[1]-xlim[0]*0.2])
+        self.ax.set_xlim([xlim[0]+xlim[0]*0.2,xlim[1]+xlim[0]*0.2])
         self.ax.set_ylim([ylim[0],ylim[1]])
         self.figure.canvas.draw()
 
     def move_right(self):
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
-        self.ax.set_xlim([xlim[0]+xlim[0]*0.2,xlim[1]+xlim[0]*0.2])
+        self.ax.set_xlim([xlim[0]-xlim[0]*0.2,xlim[1]-xlim[0]*0.2])
         self.ax.set_ylim([ylim[0],ylim[1]])
         self.figure.canvas.draw()
 
