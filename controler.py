@@ -24,14 +24,5 @@ class controleur:
     def lecture_data(self, file):
         return read_data(file)
 
-#    def path(self,frac_entry):
-#        filePath = os.path.join(self.folder_path, self.available_files[frac_entry])  # Select the file
-#        if not os.path.isfile(filePath):  # Check if file_path is a file
-#            raise FileNotFoundError
-#        return filePath
-
-    def fractal_possible(self):
-        return [f[:-4] for f in self.available_files]
-
-    def genereatepoints(self,coeffs,sums,probs):
-        return(generateDravesIFS(coeffs,sums,probs,250000))  # generate points
+    def genereatepoints(self, coeffs, sums, probs):
+        return (generateDravesIFS(coeffs, sums, probs, 250000))  # generate points
