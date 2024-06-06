@@ -1,7 +1,7 @@
 
 import os
 import numpy as np
-from subcode.main import generateDravesIFS, read_data
+from subcode.modèle import generateDravesIFS, read_data
 
 
 class controleur:

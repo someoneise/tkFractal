@@ -57,7 +57,7 @@ class Fenetre(tk.Tk):
         x, y, c = self.controleur.genereatepoints(coeffs, sums, probs)
         self.ax.scatter(x, y, c=c, s=0.1, linewidths=0, cmap=self.cmap, alpha=1)
         self.apply_zoom_pan()  # Aplicar el zoom y el pan
-        self.figure.canvas.draw()  
+        self.figure.canvas.draw()
         self.figure.canvas.flush_events()
 
     def savefigure(self, event):
