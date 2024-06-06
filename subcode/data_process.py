@@ -7,6 +7,8 @@ from numba import jit
 # from multiprocessing import Pool
 
 
+# Ce code permet d'iterer le programme pour crée les fractals à petir des coordonnèe x,y,c données en parametre 
+
 def read_data(param_file: str):
     """
     :param l2: A 2D numpy array of the affine transformations.
