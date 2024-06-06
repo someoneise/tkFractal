@@ -45,12 +45,7 @@ def weighted_rand_choice(prob):
 
 
 @jit(nopython=True)
-def generateDravesIFS(
-    coeffs: NDarray,
-    sums: NDarray,
-    probabilities: NDarray,
-    iterations: int = 50000
-) -> tuple:
+def generateDravesIFS(coeffs: NDarray, sums: NDarray, probabilities: NDarray, iterations: int = 50000) -> tuple:
     """
     :param coeffs: A 3D numpy array of the affine transformations.
     :param sums: A 2D numpy array of the sums for the affine transformations.
