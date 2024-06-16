@@ -37,6 +37,8 @@ Nous allons commencer par prendre un **point initial**, pour commencer à dessin
 (Il peut sembler un peu bizarre de dire que "nous choisissons quelque chose au hasard, selon les probabilités", mais vous pouvez imaginer cela comme si vous aviez 100 fonctions dans un sac, et vous prenez une par hasard. Par exemple, si nous avons des probabilités **f1**=.2, **f2**=.3 et **f3**=.5, il y a 20 **f1**, 30 **f2** et **50** f3 dans le sac, et maintenant, prenez l'un d'entre eux au hasard).
 En utilisant cette fonction, nous générons un nouveau point **(x1,y1) = f(0,0)**. Nous plaçons ce point sur le canevas, et répétons la fonction dessiner. Maintenant, nous avons une autre fonction, et nous allons générer un nouveau point. mais attendez, la magie est la suivante : nous allons utiliser comme argument de la fonction, le point précédent que nous venons de générer; **(x2,y2) = f(x1,y1)** . C'est pourquoi on parle de systèmes de fonctions ***itérées*.** Nous plaçons ce nouveau point sur la toile, et nous répétons cette opération environ 50 000 fois, jusqu'à ce que nous obtenions une image visible.
 
+Plus d'info : [Système de fonctions itérées - Wikipedia](https://www.wikiwand.com/fr/Syst%C3%A8me_de_fonctions_it%C3%A9r%C3%A9es)
+
 ## Notes sur le programme :
 - Le programme utilise un algorithme appelé IFS pour générer des points aléatoires, qui sont ensuite affichés à l'écran.
 - Si vous souhaitez ajouter une nouvelle forme fractale, vous devez créer un nouveau fichier _.ifs_ dans le dossier _ifs_files_, qui a les caractéristiques suivantes:
@@ -45,6 +47,7 @@ Cxx Cxy Cyx Cyy Bx By P
 ... 
 ```
 Les fonctions affines sont de la forme **f(x)= Cx+B**, avec x un vecteur, C une matrice, B un vecteur.
+
 Les entrées commençant par **C** décrivent la matrice suivante,
 Les entrées **B** décrivent le vecteur,
 Enfin, **P** est un nombre compris entre 0 et 1 qui décrit la probabilité de choisir cette matrice.
