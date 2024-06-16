@@ -50,6 +50,5 @@ Les entrées **B** décrivent le vecteur,
 Enfin, **P** est un nombre compris entre 0 et 1 qui décrit la probabilité de choisir cette matrice.
 
 > | Cxx Cxy | +  | Bx |
+> 
 > | Cyx Cyy |    | By |
-
-
