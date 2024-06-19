@@ -12,7 +12,7 @@ Hey!
 
 ## Utilisation :
 1. Cloner le dépôt, ou le télécharger sous forme de zip (et le décompresser).
-2. Exécutez le fichier principal, appelé "main.py".
+2. Exécutez le fichier principal, appelé "vue.py".
 3. Après quelques secondes, vous devriez voir l'interface graphique.
 4. Sur la gauche, sélectionnez d'abord la forme fractale que vous voulez voir, puis la palette de couleurs que vous voulez utiliser.
 5. Cliquez sur generate, et voilà !

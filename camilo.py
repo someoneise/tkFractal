@@ -35,8 +35,6 @@ class ControlWindow:
         self.btn_zoom_out = tk.Button(self.zoom_frame, text="Zoom Out", command=self.main_window.zoom_out)
         self.btn_zoom_out.pack(side=tk.RIGHT)
 
-        self.btn_regenerate = tk.Button(master, text="Regenerate", width=20)
-        self.btn_regenerate.pack(pady=10)
 
     def draw_circle(self, x, y, radius):
         self.center_canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill="white")

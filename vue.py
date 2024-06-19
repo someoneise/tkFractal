@@ -142,8 +142,7 @@ class Fenetre(tk.Tk):
         self.btn_4 = tk.Button(self, text="Navigation")
         self.btn_4.grid(column=6, row=3, sticky='wns')
         self.btn_4.bind("<Button-1>", self.open_control_window)
-        self.btn_5 = tk.Button(self, text="Refraichir la page actuelle")
-        self.btn_5.grid(column=6, row=4, sticky='wns')
+
 
     def zoom_in(self):
         self.zoom_level -= 0.2  # Incrementa el nivel de zoom
