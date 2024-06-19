@@ -131,8 +131,6 @@ class Fenetre(tk.Tk):
         self.btn_replot = tk.Button(self, text="(re)Generate")
         self.btn_replot.bind("<Button-1>", func=self.replot)
         self.btn_replot.grid(column=6, row=5)
-        self.scale = tk.Scale(orient='vertical')
-        self.scale.grid(column=4, row=2)
         self.btn_3 = tk.Button(self, text="Enregistrement en tant qu'image")
         self.btn_3.grid(column=6, row=1, sticky='wn')
         self.btn_3.bind("<Button-1>", self.savefigure)
