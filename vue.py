@@ -69,14 +69,14 @@ class Fenetre(tk.Tk):
         self.figure.canvas.flush_events()
 
     def savefigure(self, event):
-        """Il récupère la sélection actuelle de fractals de l’utilisateur dans la liste des fractals et sauvegarde la figure matplotlib dans un fichier PNG avec un nom basé sur le fractal sélectionné
+        """Méthode qui récupère la sélection actuelle de fractals de l’utilisateur dans la liste des fractals et sauvegarde la figure matplotlib dans un fichier PNG avec un nom basé sur le fractal sélectionné
         Entrée: l'événement tkinter qui déclenche cette méthode (‘event’) (même qu’avant).
         Sortie: aucune.
-"""
+        """
         self.figure.savefig("images/" + available_fractals[self.frac_entry.curselection()[0]]+".png")
 
     def Upload(self, event): 
-        """Il  permet à l'utilisateur de sélectionner des fichiers et de les déplacer vers un nouveau répertoire. (ça va changer pour pouvoir importer directement des points comme fractal)""" 
+        """Il  permet à l'utilisateur de sélectionner des fichiers et de les déplacer vers un nouveau répertoire""" 
 
         def create_directory(directory_name):
             """ Cette fonction crée un nouveau répertoire avec le nom spécifié s'il n'existe pas déjà. Il utilise Path pour vérifier si le répertoire existe. Si le répertoire existe, un message est envoyé.Il est conseillable de ne pas donner des noms avec des majuscules ou des espaces)."""
@@ -129,9 +129,9 @@ class Fenetre(tk.Tk):
 
     def open_control_window(self, event):
         """Cette fonction ouvre une nouvelle fenêtre de contrôle.
-    Entrée: l'événement tkinter qui déclenche cette méthode (‘event’) (même qu’avant).
-    Sortie: aucune.
-    """
+        Entrée: l'événement tkinter qui déclenche cette méthode (‘event’) (même qu’avant).
+        Sortie: aucune.
+        """
         control_window = tk.Toplevel(self)
         ControlWindow(control_window, self)  # Pasar la instancia de Fenetre a ControlWindow
 
