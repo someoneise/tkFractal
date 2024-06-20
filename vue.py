@@ -34,6 +34,10 @@ class Fenetre(tk.Tk):
         self.draw_widgets()
 
     def draw_scatter_top(self, x_points: list, y_points: list, col: str = 'white'):
+     """ Il est responsable de la création et de la configuration d'une figure matplotlib avec un axe pour afficher les fractals.
+    Entrée:  les coordonnées x et y des points à tracer (‘x_points’ et ‘y_points’) et la couleur des points du scatter plot définie par défaut 'white' (‘col’).
+    Sortie: l'objet figure de matplotlib (‘figure’) et l'objet axes de matplotlib (‘ax’).
+    """
         figure = Figure(figsize=(10, 7), dpi=60)
         figure_canvas = FigureCanvasTkAgg(figure, self)
         ax = Axes(figure, (0., 0., 1., 1.))  
@@ -46,6 +50,10 @@ class Fenetre(tk.Tk):
         return figure, ax  
 
     def replot(self, event):
+        """ Il est responsable pour le graphique actuel et le redessine en fonction des nouvelles données sélectionnées par l'utilisateur. Pour réaliser ça, il suit ces étapes: effacer le contenu actuel de l'axe, récupérer le chemin du fichier fractal sélectionné par l'utilisateur, vérifier si le fichier existe, sélectionner la colormap choisie, lire les données du fichier, générer les points du fractal à partir des données lues, tracer les points générés sur l'axe et mettre à jour la figure.
+        Entrée: l'événement tkinter qui déclenche cette méthode, comme le clic sur un bouton (‘event’). (ce paramètre ne sert a rien pour le moment)
+        Sortie: aucune.
+        """
         self.ax.clear()  
         selection = self.frac_entry.curselection()[0]
         file_path = os.path.join(folder_path, available_files[selection])
@@ -61,7 +69,7 @@ class Fenetre(tk.Tk):
         self.figure.canvas.flush_events()
 
     def savefigure(self, event):
-        """Il récupère la sélection actuelle de l’utilisateur dans la liste des fractals et sauvegarde la figure matplotlib dans un fichier PNG avec un nom basé sur le fractal sélectionné
+        """Il récupère la sélection actuelle de fractals de l’utilisateur dans la liste des fractals et sauvegarde la figure matplotlib dans un fichier PNG avec un nom basé sur le fractal sélectionné
         Entrée: l'événement tkinter qui déclenche cette méthode (‘event’) (même qu’avant).
         Sortie: aucune.
 """
@@ -120,10 +128,15 @@ class Fenetre(tk.Tk):
         root.mainloop()
 
     def open_control_window(self, event):
+        """Cette fonction ouvre une nouvelle fenêtre de contrôle.
+    Entrée: l'événement tkinter qui déclenche cette méthode (‘event’) (même qu’avant).
+    Sortie: aucune.
+    """
         control_window = tk.Toplevel(self)
         ControlWindow(control_window, self)  # Pasar la instancia de Fenetre a ControlWindow
 
     def draw_widgets(self):
+        """ Fonctions avec touts les boutons graphiques """
         self.params = tk.Variable(value=available_fractals)
         self.cmaps = tk.Variable(value=colormaps)
         self.lbl_cmaps = tk.Label(text='Colormaps:')  
@@ -152,14 +165,27 @@ class Fenetre(tk.Tk):
 
 
     def zoom_in(self):
+        """Il augmente le niveau de zoom sur l'axe 0.2. Le ‘apply_zoom_pan’ est appelé  pour appliquer le changement de zoom.
+        Entrée: aucune.
+        Sortie: aucune.
+        """
         self.zoom_level -= 0.2  # Incrementa el nivel de zoom
         self.apply_zoom_pan()
 
     def zoom_out(self):
+        """ Il diminue le niveau de zoom sur l'axe 0.2. Le ‘apply_zoom_pan’ est appelé  pour appliquer le changement de zoom.
+        Entrée: aucune.
+        Sortie: aucune.
+        """
         self.zoom_level += 0.2  # Decrementa el nivel de zoom
         self.apply_zoom_pan()
 
     def apply_zoom_pan(self):
+        """Il est responsable d’appliquer les transformations de zoom et de décalage (pan) sur l'axe. Pour réaliser ça, il récupère les limites actuelles des axes x et y, il calcule le centre de la vue actuelle sur les axes et la nouvelle plage de valeurs en fonction du niveau de zoom.
+        Après, pour finir, il met à jour les limites des axes en fonction des nouvelles plages calculées et il redessine la figure avec les nouvelles limites des axes.
+        Entrée: aucune.
+        Sortie: aucune.
+        """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         x_center = (xlim[0] + xlim[1]) / 2
@@ -172,6 +198,10 @@ class Fenetre(tk.Tk):
         self.figure.canvas.flush_events()
 
     def move_up(self):
+        """Il décale la vue vers le haut. Donc il récupère les limites actuelles des axes x et y, il Décale les limites de l'axe y vers le haut de 40% de la plage actuelle. Ensuite il met à jour les limites des axes et redessine la figure avec les nouvelles limites des axes.
+        Entrée: aucune.
+        Sortie: aucune.
+        """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         self.ax.set_xlim([xlim[0],xlim[1]])
@@ -180,6 +210,10 @@ class Fenetre(tk.Tk):
 
 
     def move_down(self):
+        """ Il décale la vue vers le bas, avec la même méthode de “move_up”, mais avec une décalage des limites de ‘y’ vers la bas en 40%’. 
+        Entrée: aucune.
+        Sortie: aucune.
+        """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         self.ax.set_xlim([xlim[0],xlim[1]])
@@ -187,6 +221,10 @@ class Fenetre(tk.Tk):
         self.figure.canvas.draw()
 
     def move_left(self):
+        """ Il décale la vue vers la gauche, avec la même méthode de “move_up”, mais avec une décalage des limites de ‘x’ vers la gauche en ‘20%’. 
+        Entrée: aucune.
+        Sortie: aucune.
+        """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         self.ax.set_xlim([xlim[0]+xlim[0]*0.2,xlim[1]+xlim[0]*0.2])
@@ -194,6 +232,10 @@ class Fenetre(tk.Tk):
         self.figure.canvas.draw()
 
     def move_right(self):
+        """Il décale la vue vers la droite, avec la même méthode de “move_up”, mais avec une décalage des limites de ‘x’ vers la droite en ‘20%’. 
+        Entrée: aucune.
+        Sortie: aucune
+        """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
         self.ax.set_xlim([xlim[0]-xlim[0]*0.2,xlim[1]-xlim[0]*0.2])
