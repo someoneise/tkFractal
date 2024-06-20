@@ -61,8 +61,7 @@ class Fenetre(tk.Tk):
         self.figure.canvas.flush_events()
 
     def savefigure(self, event):
-        selection = self.frac_entry.curselection()[0]
-        self.figure.savefig("images/" + available_fractals[selection]+".png")
+        self.figure.savefig("images/" + available_fractals[self.frac_entry.curselection()[0]]+".png")
 
     def Upload(self, event): 
         def create_directory(directory_name):
