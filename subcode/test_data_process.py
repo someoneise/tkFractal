@@ -1,5 +1,5 @@
 import numpy as np
-from data_process import read_data, weighted_rand_choice, generateDravesIFS
+from modèle import read_data, weighted_rand_choice, generateDravesIFS
 
 
 def test_read_data():
