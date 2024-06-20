@@ -64,7 +64,10 @@ class Fenetre(tk.Tk):
         self.figure.savefig("images/" + available_fractals[self.frac_entry.curselection()[0]]+".png")
 
     def Upload(self, event): 
+        """Il  permet à l'utilisateur de sélectionner des fichiers et de les déplacer vers un nouveau répertoire. (ça va changer pour pouvoir importer directement des points comme fractal)""" 
+
         def create_directory(directory_name):
+            """ Cette fonction crée un nouveau répertoire avec le nom spécifié s'il n'existe pas déjà. Il utilise Path pour vérifier si le répertoire existe. Si le répertoire existe, un message est envoyé.Il est conseillable de ne pas donner des noms avec des majuscules ou des espaces)."""
             directory_path = Path(directory_name)
             if not directory_path.exists():
                 directory_path.mkdir(parents=True, exist_ok=True)
@@ -73,6 +76,7 @@ class Fenetre(tk.Tk):
                 print(f"Directory '{directory_name}' already exists.")
 
         def move_files_to_directory(file_list, directory_name):
+            """ Cette fonction  déplace les fichiers spécifiés vers le répertoire donné. Il a comme entrée une liste de chemins de fichiers à déplacer (‘file_list’ ou autre) et Le nom du répertoire de destination (‘directory_name’)"""
             directory_path = Path(directory_name)
             for file in file_list:
                 file_path = Path(file)
@@ -84,10 +88,12 @@ class Fenetre(tk.Tk):
                     print(f"File '{file_path.name}' does not exist.")
 
         def select_files():
+            """ Cette fonction ouvre une boîte de dialogue pour permettre à l'utilisateur de sélectionner des fichiers, il utilise filedialog.askopenfilenames pour faire ça."""
             files = filedialog.askopenfilenames(title="Select Files")
             return files
 
         def move_files():
+            """ Cette fonction gère le processus de sélection de fichiers, de création de répertoire et de déplacement des fichiers"""
             files = select_files()
             if not files:
                 messagebox.showwarning("No files selected", "Please select files to move.")
