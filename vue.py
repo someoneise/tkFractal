@@ -61,6 +61,10 @@ class Fenetre(tk.Tk):
         self.figure.canvas.flush_events()
 
     def savefigure(self, event):
+        """Il récupère la sélection actuelle de l’utilisateur dans la liste des fractals et sauvegarde la figure matplotlib dans un fichier PNG avec un nom basé sur le fractal sélectionné
+        Entrée: l'événement tkinter qui déclenche cette méthode (‘event’) (même qu’avant).
+        Sortie: aucune.
+"""
         self.figure.savefig("images/" + available_fractals[self.frac_entry.curselection()[0]]+".png")
 
     def Upload(self, event): 
