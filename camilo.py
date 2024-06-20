@@ -10,16 +10,16 @@ class ControlWindow:
         self.control_frame = tk.Frame(master)
         self.control_frame.pack()
 
-        self.btn_up = tk.Button(self.control_frame, text="â†‘", command=self.main_window.move_up)
+        self.btn_up = tk.Button(self.control_frame, text="⬆", command=self.main_window.move_up)
         self.btn_up.grid(row=0, column=1)
 
-        self.btn_left = tk.Button(self.control_frame, text="â†", command=self.main_window.move_left)
+        self.btn_left = tk.Button(self.control_frame, text="⬅", command=self.main_window.move_left)
         self.btn_left.grid(row=1, column=0)
 
-        self.btn_right = tk.Button(self.control_frame, text="â†’", command=self.main_window.move_right)
+        self.btn_right = tk.Button(self.control_frame, text="⮕", command=self.main_window.move_right)
         self.btn_right.grid(row=1, column=2)
 
-        self.btn_down = tk.Button(self.control_frame, text="â†“", command=self.main_window.move_down)
+        self.btn_down = tk.Button(self.control_frame, text="⬇", command=self.main_window.move_down)
         self.btn_down.grid(row=2, column=1)
 
         self.center_canvas = tk.Canvas(self.control_frame, width=50, height=50)
@@ -35,8 +35,6 @@ class ControlWindow:
         self.btn_zoom_out = tk.Button(self.zoom_frame, text="Zoom Out", command=self.main_window.zoom_out)
         self.btn_zoom_out.pack(side=tk.RIGHT)
 
-        self.btn_regenerate = tk.Button(master, text="Regenerate", width=20)
-        self.btn_regenerate.pack(pady=10)
 
     def draw_circle(self, x, y, radius):
         self.center_canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill="white")
