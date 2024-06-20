@@ -1,6 +1,6 @@
-import os # Pour interagir avec le système de fichiers, comme lister les fichiers dans un répertoire
-import numpy as np #Pour manipuler des tableaux et matrices de manière efficace
-from subcode.modèle import generateDravesIFS, read_data #Importe les fonctions écrites dans le code modèle qui se trouve dans le sous-répertoire subcode
+import os  # Pour interagir avec le système de fichiers, comme lister les fichiers dans un répertoire
+import numpy as np  # Pour manipuler des tableaux et matrices de manière efficace
+from subcode.modèle import generateDravesIFS, read_data  # Importe les fonctions écrites dans le code modèle qui se trouve dans le sous-répertoire subcode
 
 
 class controleur:

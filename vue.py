@@ -34,10 +34,13 @@ class Fenetre(tk.Tk):
         self.draw_widgets()
 
     def draw_scatter_top(self, x_points: list, y_points: list, col: str = 'white'):
-     """ Il est responsable de la création et de la configuration d'une figure matplotlib avec un axe pour afficher les fractals.
-    Entrée:  les coordonnées x et y des points à tracer (‘x_points’ et ‘y_points’) et la couleur des points du scatter plot définie par défaut 'white' (‘col’).
-    Sortie: l'objet figure de matplotlib (‘figure’) et l'objet axes de matplotlib (‘ax’).
-    """
+
+        """ 
+        Il est responsable de la création et de la configuration d'une figure matplotlib avec un axe pour afficher les fractals.
+        Entrée:  les coordonnées x et y des points à tracer (‘x_points’ et ‘y_points’) et la couleur des points du scatter plot définie par défaut 'white' (‘col’).
+        Sortie: l'objet figure de matplotlib (‘figure’) et l'objet axes de matplotlib (‘ax’).
+        """
+
         figure = Figure(figsize=(10, 7), dpi=60)
         figure_canvas = FigureCanvasTkAgg(figure, self)
         ax = Axes(figure, (0., 0., 1., 1.))  
@@ -163,7 +166,6 @@ class Fenetre(tk.Tk):
         self.btn_4.grid(column=6, row=3, sticky='wns')
         self.btn_4.bind("<Button-1>", self.open_control_window)
 
-
     def zoom_in(self):
         """Il augmente le niveau de zoom sur l'axe 0.2. Le ‘apply_zoom_pan’ est appelé  pour appliquer le changement de zoom.
         Entrée: aucune.
@@ -192,8 +194,8 @@ class Fenetre(tk.Tk):
         y_center = (ylim[0] + ylim[1]) / 2
         x_range = ((xlim[1] - xlim[0]) / 2) * self.zoom_level
         y_range = ((ylim[1] - ylim[0]) / 2) * self.zoom_level
-        self.ax.set_xlim([x_center - x_range, x_center + x_range])
-        self.ax.set_ylim([y_center - y_range, y_center + y_range])
+        self.ax.set_xlim((x_center - x_range, x_center + x_range))
+        self.ax.set_ylim((y_center - y_range, y_center + y_range))
         self.figure.canvas.draw()
         self.figure.canvas.flush_events()
 
@@ -204,10 +206,9 @@ class Fenetre(tk.Tk):
         """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
-        self.ax.set_xlim([xlim[0],xlim[1]])
-        self.ax.set_ylim([ylim[0]-ylim[0]*0.4,ylim[1]-ylim[0]*0.4])
+        self.ax.set_xlim((xlim[0], xlim[1]))
+        self.ax.set_ylim((ylim[0]-ylim[0]*0.4, ylim[1]-ylim[0]*0.4))
         self.figure.canvas.draw()
-
 
     def move_down(self):
         """ Il décale la vue vers le bas, avec la même méthode de “move_up”, mais avec une décalage des limites de ‘y’ vers la bas en 40%’. 
@@ -216,8 +217,8 @@ class Fenetre(tk.Tk):
         """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
-        self.ax.set_xlim([xlim[0],xlim[1]])
-        self.ax.set_ylim([ylim[0]+ylim[0]*0.4,ylim[1]+ylim[0]*0.4])
+        self.ax.set_xlim((xlim[0], xlim[1]))
+        self.ax.set_ylim((ylim[0]+ylim[0]*0.4, ylim[1]+ylim[0]*0.4))
         self.figure.canvas.draw()
 
     def move_left(self):
@@ -227,8 +228,8 @@ class Fenetre(tk.Tk):
         """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
-        self.ax.set_xlim([xlim[0]+xlim[0]*0.2,xlim[1]+xlim[0]*0.2])
-        self.ax.set_ylim([ylim[0],ylim[1]])
+        self.ax.set_xlim((xlim[0]+xlim[0]*0.2, xlim[1]+xlim[0]*0.2))
+        self.ax.set_ylim((ylim[0], ylim[1]))
         self.figure.canvas.draw()
 
     def move_right(self):
@@ -238,8 +239,8 @@ class Fenetre(tk.Tk):
         """
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
-        self.ax.set_xlim([xlim[0]-xlim[0]*0.2,xlim[1]-xlim[0]*0.2])
-        self.ax.set_ylim([ylim[0],ylim[1]])
+        self.ax.set_xlim((xlim[0]-xlim[0]*0.2, xlim[1]-xlim[0]*0.2))
+        self.ax.set_ylim((ylim[0], ylim[1]))
         self.figure.canvas.draw()
 
 

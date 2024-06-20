@@ -11,13 +11,13 @@ with open(param_file, 'r', newline="") as csvfile:
     for row in matrixreader:
         l2.append(row)
 
-rawcoeffs = [i[:4] for i in l2]
+rawcoeffs = [i[:4] for i in l2]  # Extraire les 4 premiers éléments de chaque ligne de l2
 
-coeffs = [np.asarray([i[:2], i[2:4]]).astype(float) for i in rawcoeffs]
+coeffs = [np.asarray([i[:2], i[2:4]]).astype(float) for i in rawcoeffs]  # Convertir les 2 premiers éléments et les 2 derniers éléments de chaque ligne de rawcoeffs en un tableau numpy de type float
 
-sums = [np.array([i[4:6]]).astype(float).flatten() for i in l2]
+sums = [np.array([i[4:6]]).astype(float).flatten() for i in l2]  # Convertir les éléments 5 et 6 de chaque ligne de l2 en un tableau numpy de type float et le mettre à plat
 
-probabilites = [np.array(i[6]).astype(float) for i in l2]
+probabilites = [np.array(i[6]).astype(float) for i in l2]  # Convertir le 7ème élément de chaque ligne de l2 en un tableau numpy de type float
 
 # Initialize lists to store the x and y coordinates
 xy = np.array([0.0, 0.0])
